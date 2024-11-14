@@ -2,18 +2,43 @@
 
 class Point
 {
-public:
+private:
 	int x;
 	int y;
+
+public:
+	Point()
+	{
+		x = 0;
+		y = 0;
+	}
+
+	void SetX(int value)
+	{
+		if (value >= 0)
+			x = value;
+		else
+		{
+			//zrób coœ jeœli b³ad
+			throw std::invalid_argument("Nieprawid³owa wartoœæ");
+		}
+	}
+
+	int GetX()
+	{
+		//ewentualne zabezpieczenia
+
+		return x;
+	}
 
 	double GetDistanceToCenter()
 	{
 		return  sqrt(x * x + y * y);
 	}
 
-	double GetDistanceBeetwenTwoPionts(Point p1, Point p2)
+	double GetDistanceBeetwenTwoPionts(Point p2)
 	{
-		return  sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
+		return  sqrt((x - p2.x) * (x - p2.x) + (y - p2.y) * (y - p2.y));
 	}
 };
 
@@ -60,18 +85,25 @@ int main()
 	double dis = getDistanceBeetwenTwoPionts(x, y, x1, y1);
 
 	Point firstPoint;
-	firstPoint.x = 5;
-	firstPoint.y = 7;
+	//firstPoint.x = 5;
+	firstPoint.SetX(5);
+	//firstPoint.y = 7;
 
-	distance = getDistanceToCenter(firstPoint.x, firstPoint.y);
+	//distance = getDistanceToCenter(firstPoint.x, firstPoint.y);
 
 	distance = firstPoint.GetDistanceToCenter();
 
 	Point secondPoint;
-	secondPoint.x = 72;
-	secondPoint.y = 15;
+	//secondPoint.x = 72;
+	
+	//secondPoint.y = 15;
 
 	distance = secondPoint.GetDistanceToCenter();
+	secondPoint.SetX(72);
+	
+	distance = firstPoint.GetDistanceBeetwenTwoPionts(secondPoint);
+
+	distance = secondPoint.GetDistanceBeetwenTwoPionts(firstPoint);
 
 	//dis = getDistanceBeetwenTwoPionts(firstPoint, secondPoint);
 
